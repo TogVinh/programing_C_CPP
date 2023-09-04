@@ -1,0 +1,40 @@
+>> hàm trả về giá trị
+- trả về các đối số trong hàm
+giảm hiệu xuất khi giá trị trả về là struct
+- dùng khi trả về các đổi số trong hàm hay giá trị trong hàm
+- không dùng khi trả về struct, class phức tạp hay trả về con trỏ, địa chỉ
+
+>> hàm trả về địa chỉ
+- trả về địa chỉ một biến trong hàm
+- hàm trả về địa chỉ nhanh hơn, do chỉ cần sao chép địa chỉ và trả về
+- không thể trả về địa chỉ biến cục bộ bên trong hàm
+
+
+>> inline Function
+- với hàm lớn thì tổng chi phí lời gọi hàm so với việc thực thi hàm là không đáng kiểu
+- khi gọi hàm thì cần thời gian để tìm tới hàm, sao chép đối số để mới có thể thực thi hàm.
+- Inline Function là một loại hàm, được sử dụng để đề nghị trình biên dịch khai triển nội tuyến, chèn code tại vị trí nó được gọi
+
+Ex
+        #include <iostream>
+        using namespace std;
+
+        inline int max(int a, int b)
+        {
+        	return a > b ? a : b;
+        }
+
+        int main()
+        {
+        	cout << max(3, 6) << '\n';
+        	cout << max(6, 3) << '\n';
+
+        	return 0;
+        }
+
+- Chus ý :
++ trình biên dịch có thể không thực hiện nội tuyến trong các trường hợp như
+    . hàm chứ vòng lặp
+    . hàm chứa các biến tĩnh
+    . hàm đệ quy
+    . hàm chứa các lệnh switch hoặc goto
