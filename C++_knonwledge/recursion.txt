@@ -1,0 +1,49 @@
+>> đệ quy tuyến tính
++ có một lời gọi hàm duy nhất gọi lại chính nó
+Ex
+    int sum(int n)
+    {
+        if (n == 0)
+            return 0;
+        
+        return( sum(n-1) + n );
+    }
+
+>> Đệ quy nhị phân
++ có hai lời gọi hàm gọi lại chính nó một cách tường minh
+Ex
+    long fibonacci( int n )
+    {
+        if(n ==0 || n == 1)
+        {
+            return 1;
+        }
+
+        return fibonacci(n-1) + fibonacci(n -2);
+    }
+
+>> đệ quy phi tuyến
++ trong thân hàm có gọi lại chính nó và được đặt trong vòng lặp
+
+Ex : tính sô hạng thứ n của dãy
+X(0) = 1
+Xn = n^2 . X0 + (n-1)^2 . X1 + ... + 1^2 . X(n-1)
+
+        long calX (int n)
+        {
+            if ( n== 0)
+            {
+                return 1;
+            }
+            long s = 0;
+            for ( int i = 1; i <= n ; i++)
+            {
+                s = s + i*i calX(n - i) ;
+            }
+
+            return s;
+        }
+
+
+>> đệ quy hỗ tương
++ trong thân hàm này có gọi hàm kia và trong thân hàm kia có gọi hàm này.

@@ -38,3 +38,31 @@ Ex
     . hàm chứa các biến tĩnh
     . hàm đệ quy
     . hàm chứa các lệnh switch hoặc goto
+
+
+>> hàm có đối số mặc định - default argument
++ đối số mặc định là một giá trị mặc định được cung cấp cho hàm
+
++ ex 
+        int sum(int a, int b, int c = 0) // 0 là đối số mặc định, c là tham số tùy chọn
+        {
+        	return a + b + c;
+        }
+        
+        int main()
+        {
+        	cout << sum(1, 2) << "\t"; // c = 0
+        	cout << sum(1, 2, 3) << "\t"; // c= 3
+        
+        	system("pause");
+        	return 0;
+        }
+
++ các đối số mặc định luôn phải nằm ở cuối các parameter
++ các đối số mặc định phải cần khai báo liên tục và phải nằm cuối parameter
++ chỉ được khai báo đối số mặc định ở 1 trong 2 function declaration0 or function definition
+
+
+>> con trỏ hàm - function pointer
++ con trỏ hàm
++ callback function
