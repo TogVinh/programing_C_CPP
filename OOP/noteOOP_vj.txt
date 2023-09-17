@@ -1,0 +1,6 @@
+>> class
+- hàm thành viên trong class : Một hàm thành viên của một lớp là một hàm có định nghĩa của nó hoặc prototype của nó bên trong định nghĩa lớp giống như bất kỳ biến nào khác
+- hàm friend : Hàm friend được cho phép truy cập tới các thành viên là private và protected của một lớp
+
+>> tinh bao đóng
+
