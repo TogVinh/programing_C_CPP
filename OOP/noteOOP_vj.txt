@@ -3,4 +3,100 @@
 - hàm friend : Hàm friend được cho phép truy cập tới các thành viên là private và protected của một lớp
 
 >> tinh bao đóng
+    - encapsulation - tính đóng gói
+    - nhằm ẩn đi các thông tin chi tiết về việc cài đặt
+    - đôi khi cũng được sử dụng để chỉ việc đóng goi  cùng với nhau các dữ liệu và hàm mà đang làm việc trên dữ liệu đó 
+    - các class được đóng gói sẽ dễ sử dụng hơn và giảm tiểu độ phức tạp của chương trình
+    -> với một hàm hay class được đóng gói hoàn toàn, bạn chỉ cần biết về việc có bao nhiêu hàm thành viên đang khả dụng công khai để sử dụng class này, đối số nào cần truyền vào hàm nay, và hàm sẽ trả về giá trị gì
 
+>> Hàm khởi tạo - Constructors
+- là một loại hàm thành viên đặc biệt của class
+- được gọi tự động khi một đối tượng của class được khởi tạo.
+- Các hàm Constructors có các quy tắc riêng về việc đặt tên 
+    + phải có cùng tên với tên class
+    + các hàm Constructors không có kiểu giá trị trả về
+
+- Constructors mặc định
+    + không có tham số truyền vào
+    + nếu không có giá trị nào do người dùng cung cấp được truyền cho Constructors thì Constructors mặc định được gọi.
+
+    Example
+/*=====================================================================*/
+#include <iostream>
+ 
+class Fraction
+{
+private:
+    int m_numerator;
+    int m_denominator;
+ 
+public:
+    Fraction() // default constructor
+    {
+         m_numerator = 0;
+         m_denominator = 1;
+    }
+ 
+    int getNumerator() { return m_numerator; }
+    int getDenominator() { return m_denominator; }
+    double getValue() { return static_cast<double>(m_numerator) / m_denominator; }
+};
+ 
+int main()
+{
+    Fraction frac; // Since no arguments, calls Fraction() default constructor
+    std::cout << frac.getNumerator() << "/" << frac.getDenominator() << '\n';
+ 
+    return 0;
+}
+/*=====================================================================*/
+
+- Khởi tại trực tiếp và khởi tạo đồng đều bằng các Constructors có tham số
+- Link : https://cafedev.vn/tu-hoc-c-constructors-ham-khoi-tao-trong-c/
+
+* Khởi tạo một danh sách các biến thành viên - Member initialixer lists
+       
+        class Something
+        {
+        private:
+            int m_value1;
+            double m_value2;
+            char m_value3;
+
+        public:
+            Something()
+            {
+                // These are all assignments, not initializations
+                m_value1 = 1;
+                m_value2 = 2.2;
+                m_value3 = 'c';
+            }
+        };
+
+        -----------
+        class Something
+        {
+        private:
+            int m_value1;
+            double m_value2;
+            char m_value3;
+
+        public:
+            Something() : m_value1{ 1 }, m_value2{ 2.2 }, m_value3{ 'c' } // directly initialize our member variables
+            {
+            // No need for assignment here
+            }
+
+            void print()
+            {
+                 std::cout << "Something(" << m_value1 << ", " << m_value2 << ", " << m_value3 << ")\n";
+            }
+        };
+
+
+- initializations lists sẽ được chèn vào sau các tham số của hàm constructor, bắt đầu bằng dâu :
+và sau đó liệt kê ra theo từng cạp biến để khởi tạo và giá trị dành cho biến đó, mỗi cặp tách nhau bằng dấu phẩy
+
+=> Member initializer lists (khởi tạo danh sách các biến thành viên) cho phép chúng ta khởi tạo các biến thành viên, thay vì phải gán các giá trị cho chúng. Đây là cách duy nhất để khởi tạo các biến thành viên mà yêu cầu phải có ngay giá trị khi khởi tạo, chẳng hạn như các biến thành viên thuộc kiểu dữ liệu tham chiếu hoặc kiểu hằng, và việc sử dụng member initializer list có thể mang lại nhiều hiệu quả hơn so với việc gán các giá trị trong phần thân hàm của hàm constructor. Member initializer list có thể hoạt động với cả các kiểu dữ liệu cơ bản và cả các biến thành viên thuộc kiểu dữ liệu clas
+
+* các hàm Constructors trùng nhau và việc úy thác (delegating)
