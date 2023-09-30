@@ -100,3 +100,55 @@ và sau đó liệt kê ra theo từng cạp biến để khởi tạo và giá 
 => Member initializer lists (khởi tạo danh sách các biến thành viên) cho phép chúng ta khởi tạo các biến thành viên, thay vì phải gán các giá trị cho chúng. Đây là cách duy nhất để khởi tạo các biến thành viên mà yêu cầu phải có ngay giá trị khi khởi tạo, chẳng hạn như các biến thành viên thuộc kiểu dữ liệu tham chiếu hoặc kiểu hằng, và việc sử dụng member initializer list có thể mang lại nhiều hiệu quả hơn so với việc gán các giá trị trong phần thân hàm của hàm constructor. Member initializer list có thể hoạt động với cả các kiểu dữ liệu cơ bản và cả các biến thành viên thuộc kiểu dữ liệu clas
 
 * các hàm Constructors trùng nhau và việc úy thác (delegating)
+
+
+
+>> Hàm hủy - Destructor
+- hàm hủy sẽ tự động được gọi (nếu có tồn tại) để thực hiện việc dọn dẹp bộ nhớ cần thiết trước khi xóa đối tượng ra khỏi bộ nhớ
+- Quy tắc đặt tên của hàm hủy
+    + phải cùng tên với class, và thêm dấu ngã làm tiền tố
+    + không thể nhận vào các đối số
+    + không có kiểu dữ liệu trả về
+-> chỉ có thể tồn tại ít nhất một destructor trong class nên không thể overload các destructor
+
+>> code bên trong class 
+
+    /======================================/
+    class Date
+{
+private:
+    int m_year;
+    int m_month;
+    int m_day;
+ 
+public:
+    Date(int year, int month, int day);
+ 
+    void SetDate(int year, int month, int day);
+ 
+    int getYear() { return m_year; }
+    int getMonth() { return m_month; }
+    int getDay()  { return m_day; }
+};
+ 
+// Date constructor
+Date::Date(int year, int month, int day)
+{
+    SetDate(year, month, day);
+}
+ 
+// Date member function
+void Date::SetDate(int year, int month, int day)
+{
+    m_month = month;
+    m_day = day;
+    m_year = year;
+}
+
+/*======================================================*/
+
+- trong c++ sẽ có tính năng giúp tách biệt phần khai báo ra khỏi phần cài đặt bằng cách đặt thêm tiền tố là tên class và toán tử phân giải phạm vi (::)
+
+>> Hàm friend
+- hàm friend có thể truy cập tới các hàm thành viên bao gồm cả private, giống như là một thành viên của class đó.
+- 
