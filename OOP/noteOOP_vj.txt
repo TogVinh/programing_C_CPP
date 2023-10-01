@@ -151,4 +151,91 @@ void Date::SetDate(int year, int month, int day)
 
 >> Hàm friend
 - hàm friend có thể truy cập tới các hàm thành viên bao gồm cả private, giống như là một thành viên của class đó.
-- 
+    #include <bits/stdc++.h>
+using namespace std;
+
+class TamGiac{
+private:
+	int a,b,c;
+public:
+	TamGiac()
+	{
+		a = 1;
+		b = 1;
+		c = 1;
+	}
+	TamGiac(int a, int b, int c): a(a), b(b), c(c) {};
+	
+	friend bool kiemTraTG(TamGiac tg);
+	
+	friend ostream& operator << (ostream &os ,TamGiac &tg)
+	{
+		os<<"a = "<<tg.a<<" b = "<<tg.b<<" c = "<<tg.c<<endl;
+		return os;
+	}
+};
+	bool kiemTraTG(TamGiac tg)
+	{
+		if(tg.a>0 && tg.b>0 && tg.c>0 && (tg.a+tg.b>tg.c) && (tg.a+tg.c>tg.b) && (tg.b+tg.c>tg.a))
+			return true;
+		return false;
+	}
+	
+int main()
+{
+	TamGiac t(3,4,5);
+	cout<<kiemTraTG(t);
+	cout<<t;
+	return 0;
+ }
+
+
+ - lớp bạn
+ #include <bits/stdc++.h>
+using namespace std;
+
+class B{
+private:
+	int b;
+public:
+	B()
+	{
+		b = 10;
+	}
+	friend class A;
+};
+
+class A{
+public:
+	void print(B arg)
+	{
+		cout<<arg.b;
+	}
+};
+int main()
+{
+	B b;
+	A a;
+	a.print(b);
+ return 0;
+ }
+
+
+ >> Inheritance - tính kế thừa
+ - mô hình phân cấp (hierachuy) : là biểu đồ cho thấy các đối tượng khác nhau có liên quan như thế nào vói nhau
+ * trình tự khởi tạo 
+ - class cơ sở ở cấp cao nhất nằm ở đỉnh của cây kế thừa sẽ được xây dựng trước. 
+ - Sau đó, từng class con sẽ được xây dựng theo thứ tự, cho đến khi đến lớp con ở lớp thấp nhất, nằm dưới cùng của cây kế thừa
+
+ * các hàm constructor và khởi tạo các subclass trong kế thừa
+
+>> Hàm ảo và đa hình
+- là một loại hàm đặc biệt, khi được gọi, sẽ tự dộng hiểu và chọn đúng đối tượng gốc để gọi đúng hàm của đối tượng đó giữa lớp cơ sở và lớp dẫn xuất => đây được gọi là đa hình
+- để tạo hàm ảo, ta sẽ dụng từ khóa virtual
+- up-casting : trường hợp con trỏ lớp cha trỏ tới lớp con
+    + nếu không có từ khóa virtual thì phương thức sẽ là phương thức lớp cha ( do trình biên dịch sẽ không thể xác định được con trỏ của lớp cha đang trỏ tới đối tượng nào)
+- down-casting : trường hợp con trỏ lớp child trỏ tới parent class
+
+- virtual destructor
+    + tương tự với up-casting, nếu con trỏ lớp cha không thể phân biệt, như vậy có thể destructor của subclass có thể sẽ không được gọi tới => gây nên vấn đề về bộ nhớ.
+    + để có thể giải quyết vấn đề này ta sẽ sử dụng từ khóa virtual
