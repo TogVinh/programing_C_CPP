@@ -127,18 +127,32 @@ void popBack(node **head)
 
 void delAtPosition(node **head, int pos)
 {
-    if(*head == null)
-        return;
-
-    if (pos == 1)
+    if (*head == null || pos <= 0)
     {
-        node *tmp = *head;
-        *head = (*head)->next;
-        free(tmp);
+        printf("Position is invalid or list is empty.\n");
         return;
     }
 
-    
+    if (pos == 1)
+    {
+        popFront(head);
+        return;
+    }
+
+    node *tmp = *head;
+    for (int i = 1; i < pos - 1 && tmp->next != null; i++)
+        tmp = tmp->next;
+
+    if (tmp->next == null)
+    {
+        printf("Position out of bounds.\n");
+        return;
+    }
+
+    // Perform the deletion
+    node *delNode = tmp->next;
+    tmp->next = delNode->next;
+    free(delNode);
 }
 
 int main()
